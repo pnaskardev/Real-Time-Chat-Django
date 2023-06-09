@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/rooms/'
+LOGIN_URL = '/login/'
 
 # Application definition
 
@@ -38,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
-    'core'
+    'core',
+    'room',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +74,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chat.wsgi.application'
+ASGI_APPLICATION = 'chat.asgi.application'
 
 
 # Database
