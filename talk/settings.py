@@ -27,16 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'account.User' # new
+AUTH_USER_MODEL = 'account.User'  # new
 
-LOGIN_URL = '/login/' # new
-LOGIN_REDIRECT_URL = '/chat-admin' # new
-LOGOUT_REDIRECT_URL = '/' # new
+LOGIN_URL = '/login/'  # new
+LOGIN_REDIRECT_URL = '/chat-admin'  # new
+LOGOUT_REDIRECT_URL = '/'  # new
 
-CHANNEL_LAYERS = { 
+CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
-        
+
     }
 }
 
@@ -50,8 +50,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account', # new
-    'core', # new
+    'account',  # new
+    'core',  # new
+    'chat',  # new
 ]
 
 MIDDLEWARE = [
