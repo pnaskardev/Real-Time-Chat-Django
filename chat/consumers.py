@@ -1,11 +1,11 @@
 import json
 
 # we need this to talk to the database
-from asgiref.sync import async_to_sync
+from asgiref.sync import sync_to_async
 
 # consumer or the websocket itself
 from channels.generic.websocket import AsyncWebsocketConsumer
-from django.utils import timesince
+from django.utils.timesince import timesince
 from chat.templatetags.chatextras import initials
 
 from account.models import User
@@ -75,11 +75,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'created_at': event['created_at']
         }))
 
-    @async_to_sync
+    @sync_to_async
     def get_room(self):
         self.room = Room.objects.get(uuid=self.room_name)
 
-    @async_to_sync
+    @sync_to_async
     def create_message(self, sent_by, message, agent):
         message = Message.objects.create(body=message, sent_by=sent_by)
 
