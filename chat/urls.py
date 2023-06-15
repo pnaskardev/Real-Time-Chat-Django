@@ -1,23 +1,17 @@
-"""
-URL configuration for chat project.
+from django.urls import path
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
-from django.urls import path,include
+from .import views
+
+app_name = 'chat'
 
 urlpatterns = [
-    path('', include('core.urls')),
-    path('admin/', admin.site.urls),
+    path('api/create-room/<str:uuid>/', views.create_room, name='create-room'),
+    path('chat-admin/', views.admin, name='admin'),
+    path('chat-admin/add-user/', views.add_user, name='add_user'),
+    path('chat-admin/users/<uuid:uuid>/',
+         views.user_detail, name='user_detail'),
+    path('chat-admin/users/<uuid:uuid>/edit/',
+         views.edit_user, name='edit_user'),
+    path('chat-admin/<str:uuid>/', views.room, name='room'),
+     path('chat-admin/<str:uuid>/delete/',views.delete_room,name='delete_room')
 ]

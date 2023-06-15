@@ -1,43 +1,47 @@
-<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
 
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{% block title %}{% endblock %}Djangochat</title>
-
-        <script src="https://cdn.tailwindcss.com"></script>
-
-        <style>
-            .messages {
-                height: 400px;
-                overflow-y: auto;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.min.css' %}">
     </head>
 
-    <body class="bg-teal-600">
-        <nav class="flex items-center justify-between px-4 py-6 bg-teal-800">
-            <div>
-                <a href="/" class="text-xl text-white">Djangochat</a>
-            </div>
+    <body>
+        <div class="p-2">
+            <nav class="p-6 bg-rose-600 text-white flex justify-between items-center rounded-xl">
+                <a href="{% url 'core:index' %}" class="text-xl">Jatte</a>
 
-            <div class="flex items-center space-x-4">
-                {% if request.user.is_authenticated %}
-                    <a href="/rooms/" class="text-white hover:text-gray-200">Rooms</a>
+                <div class="flex items-center space-x-4">
+                    <a href="{% url 'core:index' %}">Home</a>
+                    <a href="{% url 'core:about' %}">About</a>
 
-                    <a href="/logout/" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Log out</a>
-                {% else %}
-                    <a href="/login/" class="text-white hover:text-gray-200">Log in</a>
-            
-                    <a href="/signup/" class="px-5 py-3 rounded-xl text-white bg-teal-600 hover:bg-teal-700">Sign up</a>
+                    {% if request.user.is_authenticated %}
+                        <a href="{% url 'chat:admin' %}" class="inline-block py-4 px-6 bg-rose-800 text-white rounded-xl">Chat admin</a>
+                    {% endif %}
+                </div>
+            </nav>
+
+            <main class="max-w-6xl mx-auto p-6">
+                {% if messages %}
+                    <div class="message mb-6 p-6 bg-gray-800 text-white rounded-xl">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
                 {% endif %}
-            </div>
-        </nav>
 
-        {% block content %}
-        {% endblock %}
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+
+        <footer class="py-12 px-6 bg-gray-800 text-white text-center text-xs">
+            <p>Copyright (c) 2023 - Jatte</p>
+        </footer>
 
         {% block scripts %}
         {% endblock %}
